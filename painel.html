@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#101820">
+<title>Painel de Chamadas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="painel" data-page="painel">
+<main id="tv">
+  <header id="hosp">HOSPITAL E MATERNIDADE ITAIPULÂNDIA</header>
+  <section id="stage" title="Clique para ativar som e tela cheia">
+    <div id="idle">
+      <svg viewBox="0 0 48 48" fill="none" stroke="#86d36b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 44V20M24 30c-6 0-10-4-10-10 6 0 10 4 10 10zM24 30c6 0 10-4 10-10-6 0-10 4-10 10zM24 20c-5 0-8-3.500-8-9 5 0 8 3.500 8 9zM24 20c5 0 8-3.500 8-9-5 0-8 3.500-8 9z"/></svg>
+      <p id="frase"></p>
+    </div>
+    <div id="call" class="hide" aria-live="assertive"><small>Chamando</small><h2 id="cNome"></h2><div class="loc" id="cLoc"></div><div class="meta" id="cMeta"></div></div>
+  </section>
+  <aside>
+    <div><div id="clock">--:--:--</div><div id="date"></div><div id="temp"></div></div>
+    <div><div class="sec"><span class="dot"></span>Aguardando atendimento</div>
+      <div class="cnt">
+        <div class="azul"><b id="k-azul">0</b><span>Azul</span></div>
+        <div class="verde"><b id="k-verde">0</b><span>Verde</span></div>
+        <div class="amarelo"><b id="k-amarelo">0</b><span>Amarelo</span></div>
+        <div class="laranja"><b id="k-laranja">0</b><span>Laranja</span></div>
+      </div></div>
+    <div><div class="sec">Últimas chamadas</div><div id="hist"></div></div>
+  </aside>
+  <a id="tvnav" href="recepcao.html">recepção</a>
+  <section id="voiceDock" aria-label="Controles de voz">
+    <div class="voiceInfo"><span class="voiceDot" id="voiceDot"></span>
+      <div><strong>Áudio das chamadas</strong><small id="ttsStatus">Toque em ativar para liberar a voz</small></div>
+    </div>
+    <div class="voiceControls">
+      <button type="button" id="ttsEnable" class="voicePrimary">Ativar voz</button>
+      <button type="button" id="ttsTest">Testar</button>
+      <button type="button" id="ttsPause" disabled>Pausar</button>
+    </div>
+  </section>
+</main>
+<div id="status" class="hide" style="position:fixed;right:10px;bottom:8px;font-size:12px;background:#7d2a2a;padding:4px 10px;border-radius:8px;z-index:9">reconectando…</div>
+<script src="app.js"></script>
+<script>if("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body>
+</html>
