@@ -1,0 +1,10 @@
+{
+  "name": "Painel Hospitalar - Player de Chamadas",
+  "short_name": "Chamadas",
+  "start_url": "/player.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#101820",
+  "theme_color": "#101820",
+  "description": "Player de voz para chamadas de pacientes"
+}
