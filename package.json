@@ -1,0 +1,8 @@
+{
+  "name": "painel-hospital",
+  "version": "1.0.0",
+  "description": "Painel de chamadas e recepção",
+  "engines": { "node": ">=18" },
+  "main": "server.js",
+  "scripts": { "start": "node server.js" }
+}
