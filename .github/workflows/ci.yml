@@ -1,0 +1,77 @@
+
+name: Validate Hospital Panel
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate project
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          elif [ -f package.json ]; then
+            npm install
+          else
+            echo "No package.json found. Skipping dependency installation."
+          fi
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check server.js
+          node --check app.js
+
+      - name: Validate required files
+        run: |
+          test -f painel.html
+          test -f recepcao.html
+          test -f style.css
+          test -f server.js
+          test -f app.js
+
+      - name: Validate server startup
+        run: |
+          PORT=3000 node server.js > server.log 2>&1 &
+          SERVER_PID=$!
+
+          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
+
+          for i in $(seq 1 15); do
+            if curl -fsS http://localhost:3000/api/state > /dev/null; then
+              echo "Server started successfully."
+              exit 0
+            fi
+
+            sleep 1
+          done
+
+          cat server.log
+          echo "Server failed to start."
+          exit 1
+          
