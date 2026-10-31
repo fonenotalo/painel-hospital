@@ -4,5 +4,10 @@
   "description": "Painel de chamadas e recepção",
   "engines": { "node": ">=18" },
   "main": "server.js",
-  "scripts": { "start": "node server.js" }
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "pg": "^8.11.0"
+  }
 }
